@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        background-color:hotpink;
+        font-family: sans-serif;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        background-color: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 10px 10px 10px rgb(54 54 54 / 55%);
+
+        width: 35vw;
+        margin-top: 25px;
+    }
+    .inputs-radio{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        width: 80%;
+    }
+    .input-text{
+        height:25px;
+        border: 1px solid #606060;
+        border-radius: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        width: 100%;
+    }
+    .inputs-text-item{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        width: 80%;
+    }
+    h1{
+        color:darkmagenta;
+    }
+    .calcular{
+        background-color:darkmagenta;
+        height:35px;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        width: 80px;
+
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+        justify-content: center;
+
+        cursor: pointer;
+
+        transition: box-shadow 0.2s ease-in-out;
+    }
+    .calcular:hover{
+        box-shadow: 5px 5px 5px rgb(54 54 54 / 55%);
+    }
+</style>
+<body>
+    <form>
+        <h1>Exercício </h1>
+        <div class="inputs-radio">
+            <div class="inputs-radio-item">
+                <input type="radio" id="opcao" name="opcao" value="soma"><label>Soma</label>
+            </div>
+            <div class="inputs-radio-item">
+                <input type="radio" id="opcao" name="opcao" value="subtracao"><label>Subtração</label>
+            </div>
+        </div>
+        <div class="inputs-text-item">
+            <label>Primeiro valor:</label>
+            <input type="number" class="input-text" id="valor1" value="0">
+        </div>
+        <div class="inputs-text-item">
+            <label>Segundo valor:</label>
+            <input type="number" class="input-text" id="valor2" value="0">
+        </div>
+        <a class="calcular" onclick="calcular()">Calcular</a>
+        <span id="resultado"></span>
+    </form>
+</body>
+</html>
+<script>
+    function calcular(){
+        document.getElementById("resultado").innerHTML = "";
+
+        if (document.getElementById("resultado-valor")){
+            document.getElementById("resultado-valor").remove() 
+        }
+
+        let valor1 = parseFloat(document.getElementById("valor1").value);
+        let valor2 = parseFloat(document.getElementById("valor2").value);
+
+        let opcao =  document.querySelector('input[name=opcao]:checked');
+
+        if (!opcao){
+            alert("É preciso escolher uma operação matemática!");
+        }else{
+            opcao = opcao.value;
+            
+            let total = 0;
+
+            if (opcao == "soma"){
+                total = valor1 + valor2;
+            }else{
+                total = valor1 - valor2;
+            }
+
+            document.getElementById("resultado").insertAdjacentHTML("afterend", "<label id='resultado-valor'>O resultado é " + total + "</label>");
+
+        }
+    }
+</script>
