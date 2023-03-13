@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        background-color:rgb(0, 73, 42);
+        font-family: sans-serif;
+
+        height: 100vh;
+        margin: 0;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        background-color: white;
+        padding: 25px;
+        border-radius: 30px;
+        box-shadow: 10px 10px 10px rgb(54 54 54 / 55%);
+
+        width: 35vw;
+        margin-top: 25px;
+    }
+    .inputs-radio{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        width: 80%;
+    }
+    .input-text{
+        height:25px;
+        border: 1px solid #606060;
+        border-radius: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        width: 100%;
+    }
+    .inputs-text-item{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        width: 80%;
+    }
+    h1{
+        color:rgb(26, 145, 30);
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 40px;
+    }
+    .calcular{
+        background-color:rgb(26, 145, 30);;
+        height:35px;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        width: 80px;
+
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+        justify-content: center;
+
+        cursor: pointer;
+
+        transition: transform 0.2s ease-in-out;
+        transition: background-color 0.5s ease-in-out;
+    }
+    .calcular:hover{
+        transform: scale(1.1);
+        background-color:  rgb(0, 73, 42);
+    }
+</style>
+<body>
+    <form>
+        <h1>CARANGO </h1>
+        <div class="inputs-text-item">
+            <label>Valor do carro:</label>
+            <input type="number" class="input-text" id="valorCarro" value="0">
+        </div>
+        <div class="inputs-radio">
+            <div class="inputs-radio-item">
+                <input type="radio" id="combustivel" name="combustivel" value="G"><label>Gasolina</label>
+            </div>
+            <div class="inputs-radio-item">
+                <input type="radio" id="combustivel" name="combustivel" value="F"><label>Flex</label>
+            </div>
+            <div class="inputs-radio-item">
+                <input type="radio" id="combustivel" name="combustivel" value="D"><label>Diesel</label>
+            </div>
+        </div>
+        <a class="calcular" onclick="calcular()">Calcular</a>
+        <span id="resultado"></span>
+    </form>
+</body>
+</html>
+<script>
+    function calcular(){
+        document.getElementById("resultado").innerHTML = "";
+
+        if (document.getElementById("resultado-valor")){
+            document.getElementById("resultado-valor").remove() 
+        }
+
+        let valorCarro = parseFloat(document.getElementById("valorCarro").value);
+
+        let combustivel =  document.querySelector('input[name=combustivel]:checked');
+
+        if (!combustivel){
+            alert("É preciso escolher uma opção de combustível!");
+        }else{
+            combustivel = combustivel.value;
+            
+            let total = 0;
+
+            if (combustivel == "G"){
+                total = valorCarro - ((valorCarro * 25)/100);
+            }else if(combustivel == "F"){
+                total = valorCarro - ((valorCarro * 21)/100);
+            }else if(combustivel == "D"){
+                total = valorCarro - ((valorCarro * 14)/100);
+            }
+
+            document.getElementById("resultado").insertAdjacentHTML("afterend", "<label id='resultado-valor'>O valor total do carro é R$" + total + "</label>");
+
+        }
+    }
+</script>

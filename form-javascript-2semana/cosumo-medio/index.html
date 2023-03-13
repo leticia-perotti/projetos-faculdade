@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        background-color: #6C63FF;
+        font-family: sans-serif;
+
+        height: 100vh;
+
+        margin: inherit;
+    }
+    .corpo{
+        background-color: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 10px 10px 10px rgb(54 54 54 / 55%);
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 15px;
+
+        width: 75vw;
+        height: 75vh;
+    }
+    img{
+        width: 45vw
+    }
+    .inputs-radio{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        width: 80%;
+    }
+    .input-text{
+        height:25px;
+        border: 1px solid #606060;
+        border-radius: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        width: 100%;
+    }
+    .inputs-text-item{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        width: 80%;
+    }
+    h1{
+        color:rgb(37, 0, 139);;
+    }
+    .calcular{
+        background-color:rgb(37, 0, 139);
+        height:35px;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        width: 80px;
+
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+        justify-content: center;
+
+        cursor: pointer;
+
+        transition: box-shadow 0.2s ease-in-out;
+    }
+    .calcular:hover{
+        box-shadow: 5px 5px 5px rgb(54 54 54 / 55%);
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+</style>
+<body>
+    <div class="corpo">
+        <form>
+            <h1>Consumo médio</h1>
+            <div class="inputs-text-item">
+                <label>Distância total:</label>
+                <input type="number" class="input-text" id="distancia" value="0">
+            </div>
+            <div class="inputs-text-item">
+                <label>Consumo:</label>
+                <input type="number" class="input-text" id="consumo" value="0">
+            </div>
+            <a class="calcular" onclick="calcular()">Calcular</a>
+            <span id="resultado"></span>
+        </form>
+        <img src="foto.svg">
+    </div>
+</body>
+</html>
+<script>
+    function calcular(){
+        document.getElementById("resultado").innerHTML = "";
+
+        if (document.getElementById("resultado-valor")){
+            document.getElementById("resultado-valor").remove() 
+        }
+
+        let consumo = parseFloat(document.getElementById("consumo").value);
+        let distancia = parseFloat(document.getElementById("distancia").value);
+
+        if (!consumo || !distancia){
+            alert("É preciso preencher ambos os campos!");
+        }else{            
+            let total = 0;
+
+            total = distancia / consumo;
+
+            total = total.toFixed(2);
+
+            document.getElementById("resultado").insertAdjacentHTML("afterend", "<label id='resultado-valor'>Média de consumo " + total + " km/L</label>");
+
+        }
+    }
+</script>
