@@ -13,7 +13,7 @@
         align-items: center;
         justify-content: center;
 
-        background-color:rgb(0, 73, 42);
+        background-color:rgb(0, 15, 73);
         font-family: sans-serif;
 
         height: 100vh;
@@ -59,12 +59,12 @@
         width: 80%;
     }
     h1{
-        color:rgb(26, 145, 30);
+        color:rgb(26, 103, 145);
         font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         font-size: 40px;
     }
     .calcular{
-        background-color:rgb(26, 145, 30);;
+        background-color:rgb(26, 103, 145);
         height:35px;
         color: white;
         border: none;
@@ -83,26 +83,19 @@
     }
     .calcular:hover{
         transform: scale(1.1);
-        background-color:  rgb(0, 73, 42);
+        background-color:  rgb(0, 15, 73);
     }
 </style>
 <body>
     <form>
-        <h1>CARANGO </h1>
+        <h1>JUROS BANCO </h1>
         <div class="inputs-text-item">
-            <label>Valor do carro:</label>
-            <input type="number" class="input-text" id="valorCarro" value="0">
+            <label>Valor em conta:</label>
+            <input type="number" class="input-text" id="valorConta" value="0">
         </div>
-        <div class="inputs-radio">
-            <div class="inputs-radio-item">
-                <input type="radio" id="combustivel" name="combustivel" value="G"><label>Gasolina</label>
-            </div>
-            <div class="inputs-radio-item">
-                <input type="radio" id="combustivel" name="combustivel" value="F"><label>Flex</label>
-            </div>
-            <div class="inputs-radio-item">
-                <input type="radio" id="combustivel" name="combustivel" value="D"><label>Diesel</label>
-            </div>
+        <div class="inputs-text-item">
+            <label>Valor do CDI (mensalmente):</label>
+            <input type="number" class="input-text" id="valorCdi" value="0">
         </div>
         <a class="calcular" onclick="calcular()">Calcular</a>
         <span id="resultado"></span>
@@ -117,27 +110,22 @@
             document.getElementById("resultado-valor").remove() 
         }
 
-        let valorCarro = parseFloat(document.getElementById("valorCarro").value);
+        let valorConta = parseFloat(document.getElementById("valorConta").value);
 
-        let combustivel =  document.querySelector('input[name=combustivel]:checked');
+        let valorCdi = parseFloat(document.getElementById("valorCdi").value);
 
-        if (!combustivel){
-            alert("É preciso escolher uma opção de combustível!");
-        }else{
-            combustivel = combustivel.value;
-            
-            let total = 0;
+        let total = 0;
 
-            if (combustivel == "G"){
-                total = valorCarro - ((valorCarro * 25)/100);
-            }else if(combustivel == "F"){
-                total = valorCarro - ((valorCarro * 21)/100);
-            }else if(combustivel == "D"){
-                total = valorCarro - ((valorCarro * 14)/100);
-            }
+        let juros_compostos = 0;
+        let juros_compostos_total = 0;
 
-            document.getElementById("resultado").insertAdjacentHTML("afterend", "<label id='resultado-valor'>O valor total do carro é R$" + total + "</label>");
-
+        for (let i = 0; i < 12; i++) {
+            valorConta = valorConta + ((valorConta * valorCdi) / 100);
         }
+
+        valorConta = valorConta.toFixed(2);
+
+        document.getElementById("resultado").insertAdjacentHTML("afterend", "<label id='resultado-valor'>O valor final da conta é R$" + valorConta + "</label>");
+        
     }
 </script>
