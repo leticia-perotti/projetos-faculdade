@@ -93,10 +93,6 @@
             <label>Valor em conta:</label>
             <input type="number" class="input-text" id="valorConta" value="0">
         </div>
-        <div class="inputs-text-item">
-            <label>Valor do CDI (mensalmente):</label>
-            <input type="number" class="input-text" id="valorCdi" value="0">
-        </div>
         <a class="calcular" onclick="calcular()">Calcular</a>
         <span id="resultado"></span>
     </form>
@@ -112,16 +108,7 @@
 
         let valorConta = parseFloat(document.getElementById("valorConta").value);
 
-        let valorCdi = parseFloat(document.getElementById("valorCdi").value);
-
-        let total = 0;
-
-        let juros_compostos = 0;
-        let juros_compostos_total = 0;
-
-        for (let i = 0; i < 12; i++) {
-            valorConta = valorConta + ((valorConta * valorCdi) / 100);
-        }
+        valorConta = valorConta * Math.pow((1 + 0.1365), 1);
 
         valorConta = valorConta.toFixed(2);
 
