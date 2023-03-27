@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0px;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body{
+        display: flex;
+        flex-direction: row;
+        align-items:stretch;
+
+        height: 100vh;
+
+        background-color: rgba(243, 30, 168, 0.695);
+    }
+    aside{
+        width: 45vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap:10%;
+    }
+
+    main{
+        margin: 40px;
+        width: 100%;
+        background-color: white;
+        border-radius: 35px;
+        box-shadow: 5px 5px 5px rgba(74, 74, 74, 0.5);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        gap: 15px;
+
+        padding: 3rem;
+    }
+    .pista-3{
+        display: none;
+        background-color: rgb(134, 16, 93);
+        width: 75px;
+        text-align: center;
+        height: 25px;
+        border-radius: 15px;
+        cursor: pointer;
+        color: white;
+
+        transition: transform 0.2s ease-in-out;
+        transition: background-color 0.5s ease-in-out;
+    }
+    .pista-3:hover{
+        transform: scale(1.1);
+        background-color: rgb(245, 139, 208);
+    }
+    .ovo-pascoa{
+        transform: rotate(-35deg);
+        height: 35%;
+    }
+    .coelho-pascoa{
+        transform: rotate(35deg);
+        height: 45%;
+    }
+    .coelho-presente{
+        display: none;
+        height: 45%;
+    }
+    h1{
+        color:rgb(134, 16, 93);
+    }
+</style>
+<body>
+    <aside>
+        <img src="/assets/ovos.png" alt="ovo-pascoa" class="ovo-pascoa" id="ovo-pascoa" onmouseleave="pista2()">
+        <img src="/assets/coelho.png" alt="coelho-pascoa" class="coelho-pascoa" id="coelho-pascoa" onmouseenter="pista4()">
+        <img src="/assets/coelho-presente.png" alt="coelho-presente" class="coelho-presente" id="coelho-presente">
+    </aside>
+    <main>
+        <h1 onmouseover="pista1()">A PÁSCOA</h1>
+        <p>
+            A Páscoa é uma celebração do calendário religioso cristão em memória à crucificação e à ressurreição de Jesus Cristo. A celebração cristã inspirou-se em uma comemoração judaica chamada pesach, que acontecia na mesma época que Jesus supostamente foi crucificado e ressuscitou.    
+        </p>
+        <p>
+            Uma característica bem conhecida da Páscoa é o fato de que sua celebração é móvel, portanto, todo ano ela é realizada em uma data diferente. Os critérios usados para definir essa data foram estabelecidos pelas autoridades da Igreja Católica durante o Concílio de Niceia, realizado no século IV d.C.        
+        </p>
+        <p>
+            A Páscoa comemorada pelos cristãos é uma ressignificação de uma festa judaica. No entanto, a comemoração cristã e a judaica têm significados completamente distintos. Esta, chamada de pesach, era realizada pela lembrança da libertação dos hebreus da escravidão no Egito.
+        </p>
+        <p>
+            Como mencionado, a Páscoa é uma das celebrações mais importantes do calendário religioso dos cristãos, e, portanto, tradições são realizadas nesse período. Neste texto já mencionamos a crucificação e ressurreição de Cristo, conhecidas como Paixão de Cristo.
+        </p>
+
+        <label id="pista-3" class="pista-3" ondblclick="pista3()">Aqui</label>
+    </main>
+
+</body>
+</html>
+<script>
+    var vPista1 = false
+    var vPista2 = false
+    var vPista3 = false
+
+    function pista1(){
+        alert("Coelinho da páscoa o que trazes pra mim?")
+        vPista1 = true
+    }
+
+    function pista2(){
+        if (vPista1){
+            document.getElementById("pista-3").style.display="block"
+            vPista2 = true
+        }     
+    }
+
+    function pista3(){
+        if(vPista2){
+            alert("Precione F12 ou inspecione a tela")
+            console.log("Branquinho e fofinho...")
+            vPista3 = true
+        }
+    }
+
+    function pista4(){
+        if (vPista3){
+            alert("Parabéns, você ganhou um presente!")
+
+            document.getElementById("ovo-pascoa").style.display="none"
+            document.getElementById("coelho-pascoa").style.display="none"
+            document.getElementById("coelho-presente").style.display="block"
+        }
+    }
+
+</script>

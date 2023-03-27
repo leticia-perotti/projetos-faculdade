@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    .dado {
+        height: 65px;
+        width: 65px;
+        border: 1px solid rgb(10, 168, 155);
+        border-radius: 15px;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        font-size: 35px;
+        color:rgb(10, 168, 155);
+    }
+
+    .resultado {
+        font-size: 15px;
+    }
+
+    .dado-girando{
+        height: 65px;
+        width: 65px;
+        border: 1px solid rgb(10, 168, 155);
+        border-radius: 15px;
+
+        animation: girando 2s linear infinite;
+
+        margin: 15px;
+
+        display: none;
+        justify-content: center;
+        align-items: center;
+        font-size: 35px;
+        color:rgb(10, 168, 155);
+    }
+    @keyframes girando {
+	0% {
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+    }
+    body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        background-color:rgb(111, 247, 235);
+        font-family: sans-serif;
+
+        height: 100vh;
+        margin: 0;
+    }
+    section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        background-color: white;
+        padding: 25px;
+        border-radius: 30px;
+        box-shadow: 10px 10px 10px rgb(54 54 54 / 55%);
+
+        width: 35vw;
+        margin-top: 25px;
+    }
+    select{
+        height:35px;
+        border: 1px solid #606060;
+        border-radius: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        width: 100%;
+    }
+    h1{
+        color:rgb(10, 168, 155);
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 40px;
+        text-align: center;
+    }
+    button{
+        background-color:rgb(111, 247, 235);
+        height:35px;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        width: 80px;
+
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+        justify-content: center;
+
+        cursor: pointer;
+
+        transition: transform 0.2s ease-in-out;
+        transition: background-color 0.5s ease-in-out;
+    }
+    button:hover{
+        transform: scale(1.1);
+        background-color: rgb(10, 168, 155);
+    }
+</style>
+<body>
+    <section>
+        <h1>Sorteador dado</h1>
+        <button onclick="rolarDado()">Rolar Dado</button>
+        <div id="dado" class="dado"></div>
+        <div class="dado-girando" id="dado-girando">?</div>
+        <div id="resultado" class="resultado"></div>
+    </section>
+</body>
+</html>
+<script>
+async function rolarDado() {
+
+    document.getElementById('dado-girando').style.display = 'flex';
+
+    document.getElementById('dado').style.display = 'none';
+    document.getElementById('resultado').style.display = 'none';
+
+    const numeroSorteado = Math.floor(Math.random() * 6) + 1;
+
+    let tempo =  Math.floor(Math.random() * 50) * 100;
+
+    await new Promise(resolve => setTimeout(resolve, tempo));
+
+    document.getElementById('dado-girando').style.display = 'none';
+    document.getElementById('dado').style.display = 'flex';
+    document.getElementById('resultado').style.display = 'block';
+
+    const dado = document.getElementById('dado');
+    dado.innerHTML = numeroSorteado;
+
+    const resultado = document.getElementById('resultado');
+    if (numeroSorteado % 2 == 0) {
+        resultado.innerHTML = 'O número é par';
+    } else {
+        resultado.innerHTML = 'O número é ímpar';
+    }
+}
+</script>

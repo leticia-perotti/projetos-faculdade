@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        background-color:rgb(109, 6, 127);
+        font-family: sans-serif;
+
+        height: 100vh;
+        margin: 0;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        background-color: white;
+        padding: 25px;
+        border-radius: 30px;
+        box-shadow: 10px 10px 10px rgb(54 54 54 / 55%);
+
+        width: 35vw;
+        margin-top: 25px;
+    }
+    select{
+        height:35px;
+        border: 1px solid #606060;
+        border-radius: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        width: 100%;
+    }
+    h1{
+        color:rgb(230, 149, 244);
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 40px;
+        text-align: center;
+    }
+    a{
+        background-color:rgb(230, 149, 244);
+        height:35px;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        width: 80px;
+
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+        justify-content: center;
+
+        cursor: pointer;
+
+        transition: transform 0.2s ease-in-out;
+        transition: background-color 0.5s ease-in-out;
+    }
+    a:hover{
+        transform: scale(1.1);
+        background-color:  rgb(109, 6, 127);
+    }
+    .perdeu{
+        color:#890e0e;
+        font-weight: bold;
+    }
+    .ganhou{
+        color:#109d41;
+        font-weight: bold;
+    }
+</style>
+<body>
+    <form>
+        <h1>PEDRA, PAPEL, TESOURA</h1>
+        <div class="inputs-text-item">
+            <label>Selecione uma opção:</label>
+            <select name="opcao" id="opcao">
+                <option value="pedra">Pedra</option>
+                <option value="papel">Papel</option>
+                <option value="tesoura">Tesoura</option>
+            </select>
+        </div>
+        <a class="jogar" onclick="jogar()">Jogar</a>
+        <span id="resultado"></span>
+
+        <a class="limpar" onclick="limpar()">Reinicar</a>
+    </form>
+</body>
+</html>
+<script>
+    function limpar(){
+        document.getElementById("resultado").innerHTML = "";
+
+        if (document.getElementById("resultado-maquina")){
+            document.getElementById("resultado-maquina").remove() 
+            document.getElementById("resultado-jogo").remove() 
+        }       
+
+        document.getElementById("opcao").value = '';
+    }
+    function jogar(){
+        if (document.getElementById("resultado-maquina")){
+            document.getElementById("resultado-maquina").remove() 
+            document.getElementById("resultado-jogo").remove() 
+        }  
+
+        let opcaoUsuario = document.getElementById("opcao").value;
+
+        if (opcaoUsuario == ''){
+            alert("Selecione uma opção")
+            return 0
+        }
+
+        //0 - pedra
+        //1 - papel
+        //2 - tesoura
+
+        let opcaoMaquina = parseInt(Math.random() * 3)
+
+        opcaoMaquina = opcaoMaquina == 0? 'pedra' : opcaoMaquina == 1 ? 'papel' : 'tesoura'
+
+        let resultado = ''
+
+        if (opcaoMaquina == opcaoUsuario){
+            resultado = 'Deu empate!'
+        }else{
+            if (opcaoUsuario == 'pedra'){
+                if (opcaoMaquina == 'papel'){
+                    resultado = 'Você perdeu!'
+                }else if(opcaoMaquina == 'tesoura'){
+                    resultado = 'Você venceu!'
+                }
+            }
+            else if (opcaoUsuario == 'papel'){
+                if(opcaoMaquina == 'pedra'){
+                    resultado = 'Você venceu!'
+                }else if (opcaoMaquina == 'tesoura'){
+                    resultado = 'Você perdeu!'
+                }
+            }
+            else if (opcaoUsuario == 'tesoura'){
+                if(opcaoMaquina == 'papel'){
+                    resultado = 'Você venceu!'
+                }else if (opcaoMaquina == 'pedra'){
+                    resultado = 'Você perdeu!'
+                }  
+            }
+        }
+
+        let classeResultado = resultado == 'Você perdeu!' ? 'perdeu' : 'ganhou'
+
+        document.getElementById("resultado").insertAdjacentHTML(
+            "afterend", 
+            "<label id='resultado-maquina'> A opção da máquina foi " + opcaoMaquina + "</label><label id='resultado-jogo' class = '" + classeResultado + "'>" + resultado + "</label>"
+            );
+
+    
+    }
+</script>
