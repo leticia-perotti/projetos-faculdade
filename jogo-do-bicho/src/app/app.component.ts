@@ -31,7 +31,7 @@ export class AppComponent {
           {animal: 'Tigre', valores:[85,86,87,88]},
           {animal:'Urso', valores:[89,90,91,92]},
           {animal: 'Veado', valores:[93,94,95,96]},
-          {animal: 'Vaca', valores:[97,98,99,100]}
+          {animal: 'Vaca', valores:[97,98,99,0]}
         ]
 
   valorDezena: number = 0
@@ -50,9 +50,9 @@ export class AppComponent {
 
   sortear(){
     this.valorPremio = 0
-    this.valor1 = Math.floor(Math.random() * 100);
-    this.valor2 = Math.floor(Math.random() * 100);
-    this.valor3 = Math.floor(Math.random() * 100);
+    this.valor1 = Math.floor(Math.random() * 100) ;
+    this.valor2 = Math.floor(Math.random() * 100) ;
+    this.valor3 = Math.floor(Math.random() * 100) ;
 
     let animaisAux: any[3] = []
 
@@ -61,30 +61,28 @@ export class AppComponent {
         f.valores.includes(this.valor1)
       ){
         animaisAux[0] = f
-      }else if(f.valores.includes(this.valor2)){
+      }
+      if(f.valores.includes(this.valor2)){
         animaisAux[1] = f
-      }else if(f.valores.includes(this.valor3)){
+      }
+      if(f.valores.includes(this.valor3)){
         animaisAux[2] = f
       }
     })
 
     if (this.valorDezena != 0){
-      console.log(this.valor1, this.valor2, this.valor3)
-
       if (this.valorDezena in [this.valor1, this.valor2, this.valor3]){
         if (this.valorDezena == this.valor1){
           this.valorPremio = this.valorAposta * 50
         }else{
           this.valorPremio = this.valorAposta * 7
         }
-
-
-        animaisAux.forEach((x: any) => {
-          if (x.valores.includes(this.valorDezena)){
-            this.valorPremio = this.valorAposta
-          }
-        })
       }
+      animaisAux.forEach((x: any) => {
+        if (x.valores.includes(this.valorDezena)){
+          this.valorPremio = this.valorAposta
+        }
+      })
     }else if (this.valorAnimal != ''){
       if(this.valorAnimal == animaisAux[0].animal){
         this.valorPremio = this.valorAposta * 12
@@ -93,7 +91,6 @@ export class AppComponent {
       }
     }
 
-    console.log(animaisAux)
     if (this.valorPremio != 0){
       this.mensagem = "Parabéns, você ganhou " + this.valorPremio + " reais"
     }else{

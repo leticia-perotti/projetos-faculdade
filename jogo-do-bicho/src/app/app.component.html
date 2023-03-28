@@ -1,22 +1,28 @@
-<div>
-  <div>
-    <div>
-      <label>Digite uma dezena</label>
-      <input type="number" [(ngModel)]="valorDezena">
-    </div>
-    <label>OU</label>
-    <div>
-      <label>Escolha um animal</label>
-      <select [(ngModel)]="valorAnimal">
-        <option *ngFor="let animal of animais" value="{{animal.animal}}">{{animal.animal}}</option>
-      </select>
-    </div>
-    <div>
-      <label>Digite o valor a ser apostado</label>
-      <input type="number" [(ngModel)]="valorAposta">
-    </div>
-  </div>
-  <a (click)="sortear()">Sortear</a>
+<body>
+  <div class="corpo">
+    <h1>Jogo do bicho</h1>
+    <div class="opcoes">
+      <div class="input">
+        <label>Digite uma dezena</label>
+        <input type="number" [(ngModel)]="valorDezena">
+      </div>
+      <label>OU</label>
+      <div class="input">
+        <label>Escolha um animal</label>
+        <select [(ngModel)]="valorAnimal">
+          <option *ngFor="let animal of animais" value="{{animal.animal}}">{{animal.animal}}</option>
+        </select>
+      </div>
+      <div class="input">
+        <label>Digite o valor a ser apostado</label>
+        <input type="number" [(ngModel)]="valorAposta">
+      </div>
 
-  <p>{{mensagem}}</p>
-</div>
+      <a (click)="sortear()">Sortear</a>
+    </div>
+
+    <p>{{mensagem}}</p>
+    <label>Valores sorteados em order: {{valor1}} - {{valor2}} - {{valor3}}</label>
+  </div>
+
+</body>
