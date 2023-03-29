@@ -44,9 +44,11 @@ export class AppComponent {
   valor2: any
   valor3: any
 
-  valorPremio: any
+  valorPremio: number = 0 
 
   mensagem: string = ""
+
+  sorteado: boolean = false
 
   sortear(){
     this.valorPremio = 0
@@ -96,6 +98,8 @@ export class AppComponent {
     }else{
       this.mensagem = "Não foi desta vez!"
     }
+
+    this.sorteado = true
   }
 
 }

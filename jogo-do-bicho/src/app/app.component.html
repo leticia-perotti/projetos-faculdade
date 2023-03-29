@@ -20,9 +20,11 @@
 
       <a (click)="sortear()">Sortear</a>
     </div>
+    <div class="sorteado" *ngIf="sorteado">
+      <p>{{mensagem}}</p>
+      <label>Valores sorteados em order: {{valor1}} - {{valor2}} - {{valor3}}</label>
+    </div>
 
-    <p>{{mensagem}}</p>
-    <label>Valores sorteados em order: {{valor1}} - {{valor2}} - {{valor3}}</label>
   </div>
 
 </body>
