@@ -44,7 +44,7 @@ export class AppComponent {
   valor2: any
   valor3: any
 
-  valorPremio: number = 0 
+  valorPremio: number = 0
 
   mensagem: string = ""
 
@@ -72,6 +72,7 @@ export class AppComponent {
       }
     })
 
+    console.log(animaisAux)
     if (this.valorDezena != 0){
       if (this.valorDezena in [this.valor1, this.valor2, this.valor3]){
         if (this.valorDezena == this.valor1){
@@ -88,7 +89,7 @@ export class AppComponent {
     }else if (this.valorAnimal != ''){
       if(this.valorAnimal == animaisAux[0].animal){
         this.valorPremio = this.valorAposta * 12
-      }else if (animaisAux.filter((x:any) => x.animal == this.valorAnimal) > 0){
+      }else if (animaisAux[1].animal == this.valorAnimal || animaisAux[2].animal == this.valorAnimal){
         this.valorPremio = this.valorAposta * 3
       }
     }
