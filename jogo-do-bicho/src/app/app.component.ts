@@ -7,36 +7,36 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   animais : any[] = [
-          {animal: 'Avestruz', valores: [1,2,3,4]},
-          {animal: 'Águia', valores:[5,6,7,8]},
-          {animal: 'Burro', valores:[9,10,11,12]},
+          {animal: 'Avestruz',  valores:[1,2,3,4]},
+          {animal: 'Águia',     valores:[5,6,7,8]},
+          {animal: 'Burro',     valores:[9,10,11,12]},
           {animal: 'Borboleta', valores:[13,14,15, 16]},
-          {animal: 'Cachorro', valores:[17,18,19, 20]},
-          {animal: 'Cabra', valores:[21,22,23,24]},
-          {animal: 'Carneiro', valores:[25,26,27,28]},
-          {animal: 'Camelo', valores:[29,30,31,32]},
-          {animal: 'Cobra', valores:[33,34,35,36]},
-          {animal: 'Coelho', valores:[37,38,39,40]},
-          {animal:'Cavalo', valores:[41,42,43,44]},
-          {animal: 'Elefante', valores:[45,46,47,48]},
-          {animal: 'Galo', valores:[49,50,51,52]},
-          {animal: 'Gato', valores:[53,54,55,56]},
-          {animal:'Jacaré', valores: [57,58,59,60]},
-          {animal: 'Leão', valores:[61,62,63,64]},
-          {animal: 'Macaco', valores:[65,66,67,68]},
-          {animal: 'Porco', valores:[69,70,71,72]},
-          {animal: 'Pavão', valores:[73,74,75,76]},
-          {animal: 'Peru', valores:[77,78,79,80]},
-          {animal: 'Touro', valores:[81,82,83,84]},
-          {animal: 'Tigre', valores:[85,86,87,88]},
-          {animal:'Urso', valores:[89,90,91,92]},
-          {animal: 'Veado', valores:[93,94,95,96]},
-          {animal: 'Vaca', valores:[97,98,99,0]}
+          {animal: 'Cachorro',  valores:[17,18,19, 20]},
+          {animal: 'Cabra',     valores:[21,22,23,24]},
+          {animal: 'Carneiro',  valores:[25,26,27,28]},
+          {animal: 'Camelo',    valores:[29,30,31,32]},
+          {animal: 'Cobra',     valores:[33,34,35,36]},
+          {animal: 'Coelho',    valores:[37,38,39,40]},
+          {animal:'Cavalo',     valores:[41,42,43,44]},
+          {animal: 'Elefante',  valores:[45,46,47,48]},
+          {animal: 'Galo',      valores:[49,50,51,52]},
+          {animal: 'Gato',      valores:[53,54,55,56]},
+          {animal:'Jacaré',     valores:[57,58,59,60]},
+          {animal: 'Leão',      valores:[61,62,63,64]},
+          {animal: 'Macaco',    valores:[65,66,67,68]},
+          {animal: 'Porco',     valores:[69,70,71,72]},
+          {animal: 'Pavão',     valores:[73,74,75,76]},
+          {animal: 'Peru',      valores:[77,78,79,80]},
+          {animal: 'Touro',     valores:[81,82,83,84]},
+          {animal: 'Tigre',     valores:[85,86,87,88]},
+          {animal:'Urso',       valores:[89,90,91,92]},
+          {animal: 'Veado',     valores:[93,94,95,96]},
+          {animal: 'Vaca',      valores:[97,98,99,0]}
         ]
 
-  valorDezena: number = 0
+  valorDezena!: number
 
-  valorAnimal: any
+  valorAnimal!: any
 
   valorAposta: any
 
@@ -50,18 +50,32 @@ export class AppComponent {
 
   sorteado: boolean = false
 
+  vencedor: boolean = false
+
+  selecaoAposta: any
+
   sortear(){
+    if (!this.valorAposta){
+      alert("É necessário preencher o valor da aposta");
+      return null
+    }
+
+    if(!this.valorDezena && !this.valorAnimal){
+      alert("É necessário selecionar um animal ou preencher o valor da ");
+      return null
+    }
+
     this.valorPremio = 0
+    this.vencedor = false
+
     this.valor1 = Math.floor(Math.random() * 100) ;
-    this.valor2 = Math.floor(Math.random() * 100) ;
+    this.valor2 = 9//Math.floor(Math.random() * 100) ;
     this.valor3 = Math.floor(Math.random() * 100) ;
 
     let animaisAux: any[3] = []
 
     this.animais.forEach((f: any) => {
-      if (
-        f.valores.includes(this.valor1)
-      ){
+      if (f.valores.includes(this.valor1)){
         animaisAux[0] = f
       }
       if(f.valores.includes(this.valor2)){
@@ -72,21 +86,23 @@ export class AppComponent {
       }
     })
 
-    console.log(animaisAux)
-    if (this.valorDezena != 0){
-      if (this.valorDezena in [this.valor1, this.valor2, this.valor3]){
+    if (this.selecaoAposta == "D"){
+      console.log([this.valor1, this.valor2, this.valor3].includes(this.valorDezena))
+      if ([this.valor1, this.valor2, this.valor3].includes(this.valorDezena)){
         if (this.valorDezena == this.valor1){
           this.valorPremio = this.valorAposta * 50
         }else{
           this.valorPremio = this.valorAposta * 7
         }
+      }else{
+        animaisAux.forEach((x: any) => {
+          if (x.valores.includes(this.valorDezena)){
+            this.valorPremio = this.valorAposta
+          }
+        })
       }
-      animaisAux.forEach((x: any) => {
-        if (x.valores.includes(this.valorDezena)){
-          this.valorPremio = this.valorAposta
-        }
-      })
-    }else if (this.valorAnimal != ''){
+    }else if (this.selecaoAposta == "A"){
+      console.log(this.valorAnimal)
       if(this.valorAnimal == animaisAux[0].animal){
         this.valorPremio = this.valorAposta * 12
       }else if (animaisAux[1].animal == this.valorAnimal || animaisAux[2].animal == this.valorAnimal){
@@ -96,11 +112,15 @@ export class AppComponent {
 
     if (this.valorPremio != 0){
       this.mensagem = "Parabéns, você ganhou " + this.valorPremio + " reais"
+      this.vencedor = true
     }else{
       this.mensagem = "Não foi desta vez!"
+      this.vencedor = false
     }
 
     this.sorteado = true
+
+    return null
   }
 
 }

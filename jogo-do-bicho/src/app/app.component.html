@@ -1,31 +1,40 @@
 <body>
   <div class="corpo">
     <h1>Jogo do bicho</h1>
-    <div class="opcoes">
-      <div class="input">
-        <label>Digite uma dezena</label>
-        <input type="number" [(ngModel)]="valorDezena">
-      </div>
-      <label>OU</label>
-      <div class="input">
-        <label>Escolha um animal</label>
-        <select [(ngModel)]="valorAnimal">
-          <option *ngFor="let animal of animais" value="{{animal.animal}}">{{animal.animal}}</option>
-        </select>
-      </div>
-      <div class="input">
-        <label>Digite o valor a ser apostado</label>
-        <input type="number" [(ngModel)]="valorAposta">
+    <div class="alinhamento">
+      <div class="dados">
+        <div class="opcoes">
+          <div class="radio">
+            <input type="radio" value="D" [(ngModel)]="selecaoAposta"> Apostar na dezena
+            <input type="radio" value="A" [(ngModel)]="selecaoAposta"> Apostar no animal
+
+          </div>
+          <div class="input">
+            <label>Digite uma dezena</label>
+            <input type="number" [(ngModel)]="valorDezena" [attr.disabled]="selecaoAposta != 'D' ? true : null">
+          </div>
+          <label>OU</label>
+          <div class="input">
+            <label>Escolha um animal</label>
+            <select [(ngModel)]="valorAnimal" [attr.disabled]="selecaoAposta != 'A' ? true : null">
+              <option *ngFor="let animal of animais" value="{{animal.animal}}">{{animal.animal}}</option>
+            </select>
+          </div>
+          <div class="input">
+            <label>Digite o valor a ser apostado</label>
+            <input type="number" [(ngModel)]="valorAposta">
+          </div>
+
+          <a (click)="sortear()">Sortear</a>
+        </div>
+        <div class="sorteado" *ngIf="sorteado">
+          <label [ngClass]="{'vencedor': vencedor, 'perdedor': !vencedor}">{{mensagem}}</label>
+          <label>Valores sorteados em order: {{valor1}} - {{valor2}} - {{valor3}}</label>
+        </div>
       </div>
 
-      <a (click)="sortear()">Sortear</a>
+      <img src="../assets/imagem-jogo-bicho.jpeg">
     </div>
-    <div class="sorteado" *ngIf="sorteado">
-      <p>{{mensagem}}</p>
-      <label>Valores sorteados em order: {{valor1}} - {{valor2}} - {{valor3}}</label>
-    </div>
-
-   
   </div>
 
 </body>

@@ -15,31 +15,37 @@ body{
     padding: 35px;
     border-radius: 30px;
 
-    width: 35vw;
+    width: 85vw;
     box-shadow: 5px 5px 5px 0px #4b4b4bac;
 
-    .opcoes{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      gap: 15px;
-      width: 100%;
-
-      margin-top: 15px !important;
-
-      .input{
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: space-around;
-
-        gap: 5px;
-        width: 100%;
-      }
-    }
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-between;
+    gap: 15px;
   }
 
+}
+
+.opcoes{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 15px;
+  width: 100%;
+
+  margin-top: 15px !important;
+
+  .input{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-around;
+
+    gap: 5px;
+    width: 100%;
+  }
 }
 
 input, select{
@@ -71,4 +77,51 @@ p{
 
 .sorteado{
   margin-top:25px !important;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+  gap: 5px;
+}
+
+.alinhamento{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2.5rem;
+}
+
+img{
+  height: 30vw;
+}
+
+.dados{
+  width: 100%;
+}
+
+@media only screen and (max-width: 750px) {
+  .alinhamento{
+    display: flex;
+    flex-direction: column;
+    align-items: space-eve;
+    justify-content: space-between;
+  }
+}
+.vencedor{
+  color: #06a00b;
+  font-weight: bold;
+}
+
+.perdedor{
+  color: #a70a0a;
+  font-weight: bold;
+}
+
+input:disabled{
+  background-color: #a8a8a8a6;
+}
+select:disabled{
+  background-color: #a8a8a8a6;
 }
