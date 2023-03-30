@@ -54,6 +54,8 @@ export class AppComponent {
 
   selecaoAposta: any
 
+  animaisAux: any[3] = []
+
   sortear(){
     if (!this.valorAposta){
       alert("É necessário preencher o valor da aposta");
@@ -68,44 +70,28 @@ export class AppComponent {
     this.valorPremio = 0
     this.vencedor = false
 
-    this.valor1 = Math.floor(Math.random() * 100) ;
-    this.valor2 = 9//Math.floor(Math.random() * 100) ;
-    this.valor3 = Math.floor(Math.random() * 100) ;
+    this.sortearValores()
 
-    let animaisAux: any[3] = []
-
-    this.animais.forEach((f: any) => {
-      if (f.valores.includes(this.valor1)){
-        animaisAux[0] = f
-      }
-      if(f.valores.includes(this.valor2)){
-        animaisAux[1] = f
-      }
-      if(f.valores.includes(this.valor3)){
-        animaisAux[2] = f
-      }
-    })
+    this.criaAnimaisAux()
 
     if (this.selecaoAposta == "D"){
-      console.log([this.valor1, this.valor2, this.valor3].includes(this.valorDezena))
       if ([this.valor1, this.valor2, this.valor3].includes(this.valorDezena)){
         if (this.valorDezena == this.valor1){
           this.valorPremio = this.valorAposta * 50
         }else{
           this.valorPremio = this.valorAposta * 7
         }
-      }else{
-        animaisAux.forEach((x: any) => {
+      }else {
+        this.animaisAux.forEach((x: any) => {
           if (x.valores.includes(this.valorDezena)){
             this.valorPremio = this.valorAposta
           }
         })
       }
-    }else if (this.selecaoAposta == "A"){
-      console.log(this.valorAnimal)
-      if(this.valorAnimal == animaisAux[0].animal){
+    } else if (this.selecaoAposta == "A"){
+      if (this.valorAnimal == this.animaisAux[0].animal){
         this.valorPremio = this.valorAposta * 12
-      }else if (animaisAux[1].animal == this.valorAnimal || animaisAux[2].animal == this.valorAnimal){
+      } else if (this.animaisAux[1].animal == this.valorAnimal || this.animaisAux[2].animal == this.valorAnimal) {
         this.valorPremio = this.valorAposta * 3
       }
     }
@@ -123,4 +109,29 @@ export class AppComponent {
     return null
   }
 
+  criaAnimaisAux(){
+    this.animais.forEach((f: any) => {
+      if (f.valores.includes(this.valor1)){
+        this.animaisAux[0] = f
+      }
+      if(f.valores.includes(this.valor2)){
+        this.animaisAux[1] = f
+      }
+      if(f.valores.includes(this.valor3)){
+        this.animaisAux[2] = f
+      }
+    })
+  }
+
+  sortearValores(){
+    this.valor1 = Math.floor(Math.random() * 100)
+
+    do{
+      this.valor2 = Math.floor(Math.random() * 100) ;
+    }while(this.valor1 == this.valor2)
+
+    do{
+      this.valor3 = Math.floor(Math.random() * 100) ;
+    }while(this.valor1 == this.valor3 || this.valor2 == this.valor3)
+  }
 }
