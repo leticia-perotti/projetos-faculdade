@@ -82,7 +82,8 @@ export class AppComponent {
           this.valorPremio += this.valorAposta * 50
           this.vencedor = true;
           this.dezenaPremio = this.valor1
-        }else if(this.valorDezena == this.valor2 || this.valorDezena == this.valor3){
+        }
+        if(this.valorDezena == this.valor2 || this.valorDezena == this.valor3){
           this.valorPremio += this.valorAposta * 7
           this.vencedor = true;
           this.dezenaPremio = this.valorDezena == this.valor2 ? this.valor2 : this.valor3;
@@ -145,6 +146,5 @@ export class AppComponent {
     do{
       this.valor3 = Math.floor(Math.random() * 100) ;
     }while(this.valor1 == this.valor3 || this.valor2 == this.valor3)
-
   }
 }
